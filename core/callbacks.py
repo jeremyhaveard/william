@@ -1,7 +1,7 @@
 ﻿"""
 core/callbacks.py — LangChain callback handler for william.
 
-williamCallbackHandler bridges LangChain/LangGraph events to:
+WilliamCallbackHandler bridges LangChain/LangGraph events to:
   1. The SSE queue  (so the browser console sees real-time detail)
   2. The log file   (via core.logger helpers)
 
@@ -40,7 +40,7 @@ def _sse(event: str, data: dict) -> str:
     return f"event: {event}\ndata: {json.dumps(data)}\n\n"
 
 
-class williamCallbackHandler(BaseCallbackHandler):
+class WilliamCallbackHandler(BaseCallbackHandler):
     """
     Captures fine-grained LangChain events and routes them to the SSE queue
     and structured log file.
