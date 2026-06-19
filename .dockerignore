@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# Node
+ui/node_modules/
+ui/.vite/
+
+# Secrets — never bake into image
+.env
+.env.*
+*.env
+
+# Local data — mounted at runtime
+data/
+logs/
+output/
+
+# Git
+.git/
+.gitignore
+
+# Dev tools
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.log

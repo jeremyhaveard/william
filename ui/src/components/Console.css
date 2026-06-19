@@ -1,0 +1,269 @@
+.console-panel {
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+  flex-shrink: 0;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.console-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+.console-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.log-count {
+  font-size: 10px;
+  color: var(--text-dim);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ── Details toggle ─────────────────────────────────────────── */
+.details-btn {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: 0;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.details-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.details-btn.active {
+  background: rgba(88, 166, 255, 0.12);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.clear-btn {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.clear-btn:not(:disabled):hover {
+  border-color: var(--text-dim);
+  color: var(--text);
+}
+.clear-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Log scroll ─────────────────────────────────────────────── */
+.log-scroll {
+  flex: 1;
+  overflow-y: auto;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  line-height: 1.45;
+}
+
+.console-empty {
+  color: var(--text-dim);
+  font-family: var(--sans);
+  font-size: 12px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* ── Request cycle separator ────────────────────────────────── */
+.log-separator {
+  height: 1px;
+  background: var(--border);
+  margin: 6px 10px;
+  opacity: 0.5;
+}
+
+/* ── Log entry row ──────────────────────────────────────────── */
+.log-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 3px 10px;
+  border-bottom: 1px solid transparent;
+  cursor: default;
+  position: relative;
+}
+.log-entry:hover {
+  background: var(--bg2);
+}
+
+.log-ts {
+  color: var(--text-dim);
+  font-size: 10px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.log-icon {
+  flex-shrink: 0;
+  width: 12px;
+  text-align: center;
+}
+
+.log-label {
+  flex-shrink: 0;
+  width: 82px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.65;
+}
+
+.log-body {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Inline timing tag ──────────────────────────────────────── */
+.log-ms {
+  margin-left: 8px;
+  font-size: 10px;
+  color: var(--text-dim);
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* ── Model name ─────────────────────────────────────────────── */
+.ev-model {
+  color: #c3b1e1;
+  font-weight: 600;
+}
+
+/* ── Timing value ───────────────────────────────────────────── */
+.ev-timing-value {
+  color: #c3b1e1;
+  font-weight: 600;
+}
+
+/* ── Traceback block (error details ON) ─────────────────────── */
+.ev-traceback {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  color: #f85149;
+  white-space: pre-wrap;
+  word-break: break-all;
+  opacity: 0.8;
+}
+
+/* ── Detail block (details ON) ──────────────────────────────── */
+.log-detail-block {
+  background: var(--bg3);
+  border-left: 2px solid var(--border);
+  margin: 0 10px 4px 32px;
+  border-radius: 0 4px 4px 0;
+}
+
+.log-detail-pre {
+  margin: 0;
+  padding: 6px 10px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--text-dim);
+  white-space: pre-wrap;
+  word-break: break-all;
+  line-height: 1.5;
+}
+
+/* ── Hover tooltip ──────────────────────────────────────────── */
+.log-tooltip {
+  position: fixed;
+  z-index: 9999;
+  transform: translateX(calc(-100% - 8px));
+  max-width: 480px;
+  min-width: 280px;
+  background: var(--bg2);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  pointer-events: none;
+}
+
+.log-tooltip-pre {
+  margin: 0;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text);
+  white-space: pre;
+  line-height: 1.55;
+  overflow: hidden;
+}
+
+/* ── Text colours ───────────────────────────────────────────── */
+.ev-text { color: var(--text); }
+.ev-text.dim { color: var(--text-dim); }
+.ev-text.error { color: #f85149; }
+
+.ev-badge {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 6px;
+  font-size: 10px;
+}
+
+.ev-tool-name {
+  color: #ffa657;
+  font-weight: 600;
+}
+.ev-args {
+  color: var(--text-dim);
+  font-size: 10.5px;
+}
+
+/* ── Per-event-type accent on icon + label ──────────────────── */
+/* Core events */
+.ev-user        .log-icon, .ev-user        .log-label { color: var(--accent); }
+.ev-routing     .log-icon, .ev-routing     .log-label { color: #d2a8ff; }
+.ev-agent       .log-icon, .ev-agent       .log-label { color: #3fb950; }
+.ev-tool        .log-icon, .ev-tool        .log-label { color: #ffa657; }
+.ev-message     .log-icon, .ev-message     .log-label { color: var(--accent2); }
+.ev-done        .log-icon, .ev-done        .log-label { color: var(--text-dim); }
+.ev-error       .log-icon, .ev-error       .log-label { color: #f85149; }
+
+/* New detail events */
+.ev-tool-result .log-icon, .ev-tool-result .log-label { color: #e3b341; }
+.ev-llm-start   .log-icon, .ev-llm-start   .log-label { color: #79c0ff; }
+.ev-llm-end     .log-icon, .ev-llm-end     .log-label { color: #56d364; }
+.ev-milestone   .log-icon, .ev-milestone   .log-label { color: #f0f6fc; }
+.ev-timing      .log-icon, .ev-timing      .log-label { color: #8b949e; }
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+.log-scroll::-webkit-scrollbar { width: 6px; }
+.log-scroll::-webkit-scrollbar-track { background: transparent; }
+.log-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }

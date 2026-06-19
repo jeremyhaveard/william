@@ -1,0 +1,21 @@
+python-dotenv
+langgraph>=0.3
+langgraph-checkpoint-sqlite
+langchain-anthropic
+langchain-aws
+langchain-core
+langchain
+pydantic>=2
+pyyaml
+ddgs
+requests
+beautifulsoup4
+playwright
+fastapi
+uvicorn[standard]
+httpx
+python-jose[cryptography]
+boto3
+# Uncomment for PostgreSQL (AWS production):
+# langgraph-checkpoint-postgres
+# psycopg[binary]

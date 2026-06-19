@@ -1,0 +1,136 @@
+.contact-page {
+  min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-wrap {
+  display: flex;
+  gap: 60px;
+  max-width: 960px;
+  margin: 60px auto;
+  padding: 0 40px;
+  width: 100%;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+/* ── Left column ────────────────────────────────────────────── */
+.contact-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text-head);
+  margin: 0 0 16px;
+  letter-spacing: -0.8px;
+}
+
+.contact-sub {
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.65;
+  margin: 0 0 36px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+.info-icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+  color: var(--accent);
+}
+
+/* ── Form ───────────────────────────────────────────────────── */
+.contact-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+}
+
+.form-success {
+  background: rgba(63, 185, 80, 0.1);
+  border: 1px solid rgba(63, 185, 80, 0.4);
+  color: var(--accent2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 13px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+}
+
+.form-input {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 14px;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.form-input:focus { border-color: var(--accent); }
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.5;
+}
+
+.form-submit {
+  padding: 12px 28px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: #0d1117;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: opacity 0.15s;
+}
+.form-submit:hover { opacity: 0.85; }
+
+/* ── Footer ─────────────────────────────────────────────────── */
+.contact-footer {
+  padding: 20px 40px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+@media (max-width: 700px) {
+  .contact-wrap { flex-direction: column; gap: 32px; }
+}

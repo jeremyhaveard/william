@@ -1,0 +1,110 @@
+# Government Contract Search Configuration
+# Controls which portals Scout searches and which geographies to target.
+#
+# Set enabled: true/false to turn each source on or off.
+# Sources with enabled: false are completely skipped — no API calls made.
+#
+# platform field:
+#   federal   — SAM.gov REST API
+#   florida   — Florida MyFloridaMarketPlace VBS REST API
+#   opengov   — OpenGov Procurement (Playwright scrape)
+#   bonfire   — Bonfire/Euna Procurement (Playwright scrape)
+#   demandstar — DemandStar (Playwright scrape, partial data without login)
+#   simple    — Plain HTML municipal website (requests + BeautifulSoup)
+
+sources:
+
+  # ── Federal ────────────────────────────────────────────────────────────────
+  federal:
+    enabled: false
+    platform: federal
+    label: "SAM.gov (All USA)"
+    notes: "Requires SAM_API_KEY in .env"
+
+  # ── State ──────────────────────────────────────────────────────────────────
+  florida_state:
+    enabled: false
+    platform: florida
+    label: "Florida MyFloridaMarketPlace VBS"
+    notes: "No API key required — public portal"
+
+  # ── OpenGov Platform ───────────────────────────────────────────────────────
+  # One tool (opengov.py) covers all agencies on this platform.
+  # Add new agencies by adding a new entry with platform: opengov.
+
+  # NOTE: OpenGov portals are blocked by Cloudflare enterprise protection.
+  # To enable: get cf_clearance cookie from your browser and set OPENGOV_CF_CLEARANCE in .env.
+
+  opengov_pinellas_county:
+    enabled: false
+    platform: opengov
+    label: "Pinellas County"
+    agency_slug: "pinellasfl"
+    url: "https://procurement.opengov.com/portal/pinellasfl"
+    notes: "Blocked by Cloudflare — needs cf_clearance cookie"
+
+  opengov_clearwater:
+    enabled: false
+    platform: opengov
+    label: "City of Clearwater"
+    agency_slug: "myclearwater"
+    url: "https://procurement.opengov.com/portal/myclearwater"
+    notes: "Blocked by Cloudflare — needs cf_clearance cookie"
+
+  opengov_st_pete:
+    enabled: false
+    platform: opengov
+    label: "City of St. Petersburg"
+    agency_slug: "stpete"
+    url: "https://procurement.opengov.com/portal/stpete"
+    notes: "Blocked by Cloudflare — needs cf_clearance cookie"
+
+  opengov_tampa:
+    enabled: false
+    platform: opengov
+    label: "City of Tampa"
+    agency_slug: "cityoftampa"
+    url: "https://procurement.opengov.com/portal/cityoftampa"
+    notes: "Blocked by Cloudflare — needs cf_clearance cookie"
+
+  opengov_pcsb:
+    enabled: false
+    platform: opengov
+    label: "Pinellas County Schools"
+    agency_slug: "PCSB"
+    url: "https://procurement.opengov.com/portal/PCSB"
+    notes: "Blocked by Cloudflare — needs cf_clearance cookie"
+
+  # ── Bonfire/Euna Platform ──────────────────────────────────────────────────
+  # One tool (bonfire.py) covers all agencies on this platform.
+
+  bonfire_hillsborough:
+    enabled: true
+    platform: bonfire
+    label: "Hillsborough County"
+    agency_subdomain: "hillsboroughcounty"
+    url: "https://hillsboroughcounty.bonfirehub.com/opportunities"
+
+  bonfire_tarpon_springs:
+    enabled: true
+    platform: bonfire
+    label: "City of Tarpon Springs"
+    agency_subdomain: "ctsfl"
+    url: "https://ctsfl.bonfirehub.com/opportunities"
+
+  # ── Simple Municipal Websites ──────────────────────────────────────────────
+
+  safety_harbor:
+    enabled: true
+    platform: simple
+    label: "City of Safety Harbor"
+    url: "https://www.cityofsafetyharbor.com/607/Solicitations"
+
+  # ── DemandStar Platform ────────────────────────────────────────────────────
+
+  demandstar_dunedin:
+    enabled: false
+    platform: demandstar
+    label: "City of Dunedin"
+    agency_name: "City of Dunedin"
+    notes: "Partial data only — full details require DemandStar login"
