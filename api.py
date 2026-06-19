@@ -54,23 +54,6 @@ from core.db import get_db
 
 _log = get_logger("api")
 
-# ── Git global config (uses GITHUB_TOKEN from Secrets Manager) ────
-def _configure_git():
-    import subprocess
-    token = os.getenv("GITHUB_TOKEN", "")
-    cmds = [
-        ["git", "config", "--global", "user.name", "William"],
-        ["git", "config", "--global", "user.email", "william@ai"],
-        ["git", "config", "--global", "credential.helper", "store"],
-    ]
-    for cmd in cmds:
-        subprocess.run(cmd, capture_output=True)
-    if token:
-        cred_file = os.path.expanduser("~/.git-credentials")
-        with open(cred_file, "w") as f:
-            f.write(f"https://william:{token}@github.com\n")
-
-_configure_git()
 
 app = FastAPI(title="William API")
 
