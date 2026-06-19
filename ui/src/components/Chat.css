@@ -70,7 +70,7 @@
 .user-bubble {
   background: var(--user-bg);
   color: var(--text-head);
-  border: 1px solid #2d4a7a;
+  border: 1px solid #1a4a25;
 }
 
 .assistant-bubble {

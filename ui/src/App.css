@@ -9,10 +9,10 @@
   --text:       #c9d1d9;
   --text-dim:   #6e7681;
   --text-head:  #f0f6fc;
-  --accent:     #58a6ff;
-  --accent2:    #3fb950;
-  --user-bg:    #1c2e4a;
-  --agent-bg:   #1a2332;
+  --accent:     #3fb950;
+  --accent2:    #56d364;
+  --user-bg:    #112a18;
+  --agent-bg:   #0e1f12;
   --mono:       ui-monospace, 'Cascadia Code', Consolas, monospace;
   --sans:       system-ui, 'Segoe UI', sans-serif;
   --radius:     8px;
