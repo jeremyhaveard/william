@@ -12,6 +12,13 @@ const AGENTS = [
     desc: 'Searches SAM.gov, Florida VBS, Bonfire, OpenGov, and municipal portals for contract opportunities. Manages your bid pipeline, tracks deadlines, and generates reports.',
   },
   {
+    name: 'Karen',
+    role: 'Document Creator',
+    color: '#f78166',
+    icon: '📄',
+    desc: 'Generates Word documents, Excel spreadsheets, and PowerPoint presentations — bid summaries, capability statements, and contract reports.',
+  },
+  {
     name: 'Greta',
     role: 'Bid Scorer (coming soon)',
     color: '#8b949e',

@@ -14,6 +14,7 @@ from pydantic import Field, create_model
 from core.db import db_path
 
 from agents.scout.agent import scout_agent
+from agents.karen.agent import karen_agent
 from core.llm import get_llm
 
 # ── Supervisor prompt ──────────────────────────────────────────────────────────
@@ -21,23 +22,26 @@ WILLIAM_PROMPT = """You are William, a government contract management supervisor
 
 Agents:
 - scout: Government contract researcher and pipeline manager. Route here for searching contract opportunities on SAM.gov, Florida VBS, Bonfire, OpenGov, and municipal portals. Also handles bid pipeline management, deadline tracking, and generating contract reports.
+- karen: Document and presentation creator. Route here for Word (.docx), Excel (.xlsx), and PowerPoint (.pptx) files and written reports.
 
 Routing rules:
-- Route all contract research, opportunity discovery, pipeline, and reporting tasks to scout.
-- Once scout has returned a clear, complete answer, route to FINISH immediately.
+- Route contract research, opportunity discovery, pipeline, and reporting tasks to scout.
+- Route document, spreadsheet, and presentation creation to karen.
+- A task may require both agents in sequence (e.g. scout finds opportunities, karen formats a report) — that is fine.
+- Once an agent has returned a clear, complete answer, route to FINISH immediately.
 - If the last agent message contains a direct answer or saved file confirmation, the task is complete — route to FINISH.
-- Only re-route if the scout explicitly requests additional steps."""
+- Only route to another agent if a genuinely different skill is needed."""
 
 # ── Dynamic Route model ────────────────────────────────────────────────────────
 Route = create_model(
     "Route",
-    next=(Literal["scout", "FINISH"], Field(..., description="Next agent or FINISH")),
+    next=(Literal["scout", "karen", "FINISH"], Field(..., description="Next agent or FINISH")),
     reason=(str, Field(..., description="Why this route was chosen")),
 )
 
 _llm = get_llm()
 
-_AGENT_NAMES = {"scout"}
+_AGENT_NAMES = {"scout", "karen"}
 
 
 def supervisor(state: MessagesState) -> Command:
@@ -83,6 +87,14 @@ def _last_content(result: dict) -> str:
 
 
 # ── Agent nodes ────────────────────────────────────────────────────────────────
+def karen_node(state: MessagesState) -> Command:
+    result = karen_agent.invoke(state)
+    return Command(
+        update={"messages": [HumanMessage(content=_last_content(result), name="karen")]},
+        goto="supervisor",
+    )
+
+
 def scout_node(state: MessagesState) -> Command:
     result = scout_agent.invoke(state)
     return Command(
@@ -95,6 +107,7 @@ def scout_node(state: MessagesState) -> Command:
 _builder = StateGraph(MessagesState)
 _builder.add_node("supervisor", supervisor)
 _builder.add_node("scout", scout_node)
+_builder.add_node("karen", karen_node)
 _builder.add_edge(START, "supervisor")
 
 # ── Persistent checkpointer ────────────────────────────────────────────────────
@@ -128,6 +141,7 @@ graph = _builder.compile(checkpointer=_make_checkpointer())
 # ── Streaming labels ───────────────────────────────────────────────────────────
 _LABELS: dict[str, str] = {
     "scout": "Scout (research)",
+    "karen": "Karen (documents)",
 }
 
 

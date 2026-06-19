@@ -196,7 +196,7 @@ def _update_thread(thread_id: str, prompt: str) -> None:
 
 
 # Top-level William nodes — anything else is an internal subgraph step and should be ignored
-_TOP_LEVEL_NODES = {"supervisor", "scout"} | set(_LABELS.keys())
+_TOP_LEVEL_NODES = {"supervisor", "scout", "karen"} | set(_LABELS.keys())
 
 
 def _process_event(

@@ -7,6 +7,9 @@ langchain-core
 langchain
 pydantic>=2
 pyyaml
+python-docx
+openpyxl
+python-pptx>=0.6.23,<1.1
 ddgs
 requests
 beautifulsoup4
